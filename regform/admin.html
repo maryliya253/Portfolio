@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Learnify</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body { font-family: "Poppins", sans-serif; margin:0; background:#f9f9f9; }
+    header { background:#1e90ff; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    header h1 { margin:0; }
+    header nav a { color:#fff; margin-left:15px; text-decoration:none; font-weight:500; }
+    main { max-width:900px; margin:2rem auto; padding:1rem; }
+    section { background:#fff; padding:1rem 2rem; border-radius:15px; box-shadow:0 6px 15px rgba(0,0,0,0.1); margin-bottom:2rem; }
+    input, button { padding:0.5rem 1rem; margin:0.5rem 0; border-radius:10px; border:1px solid #ddd; }
+    button { background:#1e90ff; color:#fff; border:none; cursor:pointer; }
+    button:hover { background:#104e8b; }
+    ul { list-style:none; padding:0; }
+    li { padding:0.5rem 0; border-bottom:1px solid #ddd; }
+  </style>
+</head>
+<body>
+
+<header>
+    <h1>Admin Dashboard</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Student Dashboard</a>
+      <a href="login.html">Logout</a>
+    </nav>
+</header>
+
+<main>
+  <section>
+    <h2>Manage Courses</h2>
+    <form id="addCourseForm">
+      <input type="text" name="courseName" placeholder="Course Name" required>
+      <input type="text" name="courseDesc" placeholder="Course Description" required>
+      <button type="submit">Add Course</button>
+    </form>
+    <ul id="courseList">
+      <li>Web Development - Learn HTML, CSS, JavaScript basics</li>
+      <li>Cybersecurity - Fundamentals of online safety</li>
+      <li>Data Science - Introduction to Python and data analysis</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Manage Users</h2>
+    <ul id="userList">
+      <li>Mary Liya - mary@example.com</li>
+      <li>John Doe - john@example.com</li>
+      <li>Jane Smith - jane@example.com</li>
+    </ul>
+  </section>
+</main>
+
+</body>
+</html>

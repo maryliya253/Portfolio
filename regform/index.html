@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learnify - Online Learning Platform</title>
+  <link rel="stylesheet" href="./styles.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #f9f9f9;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e90ff, #6a11cb);
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    header h1 { margin: 0; font-size: 28px; }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fff;
+    }
+
+    .hero h2 { font-size: 32px; margin-bottom: 10px; color: #333; }
+    .hero p { font-size: 18px; color: #555; }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #1e90ff;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .btn:hover { background: #155ab6; transform: scale(1.05); }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .course-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+      padding: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .course-card:hover { transform: translateY(-5px); }
+    .course-card img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; }
+    .course-card h3 { margin: 15px 0 10px; font-size: 20px; color: #333; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="navbar-container">
+    <h1 class="logo">📘Learnify</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="registrationform.html">Register</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <h2>Upgrade Your Skills</h2>
+  <p>Choose from our wide range of courses and start learning today!</p>
+  <a href="registrationform.html" class="btn">Register</a>
+  <a href="login.html" class="btn">Login</a>
+</section>
+
+<section class="courses">
+  <div class="course-card">
+    <img src="https://images.pexels.com/photos/574071/pexels-photo-574071.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Web Development">
+    <h3>Web Development</h3>
+  </div>
+  <div class="course-card">
+    <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="Data Science">
+    <h3>Data Science</h3>
+  </div>
+  <div class="course-card">
+    <img src="https://images.pexels.com/photos/3184325/pexels-photo-3184325.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="UI/UX Design">
+    <h3>UI/UX Design</h3>
+  </div>
+  <div class="course-card">
+    <img src="https://static.vecteezy.com/system/resources/previews/060/511/967/non_2x/cyber-security-data-protection-concept-network-safety-information-privacy-padlock-with-check-mark-icon-inside-transparent-sphere-shield-with-hexagon-pattern-on-blue-background-illustration-vector.jpg" alt="Cyber Security">
+    <h3>Cyber Security</h3>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+// Protected links warning
+document.querySelectorAll('header nav a').forEach(link => {
+  if(link.textContent === "Dashboard" || link.textContent === "Profile" || link.textContent === "Contact") {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      Swal.fire({
+        icon: 'info',
+        title: 'Access Denied',
+        text: 'Please login first!',
+        confirmButtonColor: '#1e90ff'
+      });
+    });
+  }
+});
+</script>
+
+</body>
+</html>

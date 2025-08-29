@@ -1,0 +1,31 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1e90ff;
+  color: #fff;
+  position: fixed;   /* stick it at the top */
+  top: 0;            /* align to very top */
+  left: 0;
+  width: 1303px;       /* full width */
+  z-index: 1000;     /* keep it above other elements */
+}
+
+
+.navbar-container .logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.navbar-container nav a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.navbar-container nav a:hover {
+  color: #ffd700;
+}

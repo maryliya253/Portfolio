@@ -1,0 +1,100 @@
+Project
+---
+
+ 🔹 Workflow for Your Online Learning Portal
+
+ 1. Plan Website Structure (Sitemap)
+
+Think of your website as a set of connected pages:
+
+* index.html → Homepage (already done)
+* registrationform.html → User Registration (already done)
+* login.html → User Login
+* dashboard.html → Student Dashboard (after login, where courses are shown)
+* course.html → Course Details (each course can have its own page)
+* profile.html → User Profile & Settings
+* about.html → About the portal / team
+* contact.html → Contact / Support
+* admin.html → Admin panel (if you want to manage courses, users, etc.)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 2. Decide Core Features
+
+Since it’s a learning portal, you need:
+
+✅ Authentication – Registration, Login, Logout
+✅ Dashboard – Shows courses available + enrolled courses
+✅ Course Pages – Each course has image, description, and “Enroll” button
+✅ User Profile – Shows user info + progress (can be simple at first)
+✅ Certificates/Projects – If it’s part of your idea (you already mentioned certificates)
+✅ Downloadable Materials – PDFs, PPTs, Project Zips, etc.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 3. Basic Workflow
+
+1. User lands on homepage (index.html) → sees portal intro + course list.
+2. If not registered → click Register → goes to registrationform.html.
+3. If registered → Login → goes to dashboard.html.
+4. On dashboard.html, user can:
+
+   * See available courses (Cyber Security, Programming, etc.).
+   * Click a course → open course.html.
+   * Enroll/download materials.
+5. User can view/edit profile in profile.html.
+6. Certificates or completed course info can also show up in dashboard/profile.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Suggested Folder Structure
+
+```
+project/
+│
+├── index.html
+├── registrationform.html
+├── login.html
+├── dashboard.html
+├── course.html
+├── profile.html
+├── about.html
+├── contact.html
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   └── script.js
+│
+├── images/
+│   └── (all your course images, logo, icons, etc.)
+│
+├── certificates/
+│   └── (pdf files of certificates)
+│
+└── projects/
+    └── (zip/docs/ppt etc.)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ 5. Technology Choice
+
+Since you’re a BCA student and making this as a project, you can keep it simple first:
+
+* Frontend: HTML, CSS, JS
+* Backend (optional if needed):** PHP or Node.js
+* Database (optional if needed):** MySQL (for user login, courses, progress)
+
+If you don’t need backend for now, you can just simulate login with JS (not secure, but fine for a demo project).
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+✨ Plan
+
+* Finish Login + Dashboard next → then add Course Pages.
+* After that, make Profile & Certificate download section.
+* Finally, polish with **About + Contact** pages.
+
+---
+

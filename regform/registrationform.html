@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | Learnify</title>
+<link rel="stylesheet" href="./styles.css">
+<style>
+body { margin:0; font-family:"Poppins",sans-serif; background: linear-gradient(135deg,#1e90ff,#6a11cb); min-height:100vh; display:flex; flex-direction:column; }
+header { width:100%; background:#1e90ff; padding:15px 40px; display:flex; justify-content:space-between; align-items:center; color:#fff; }
+header nav a { color:#fff; margin-left:15px; text-decoration:none; font-weight:500; }
+.container { display:flex; align-items:flex-start; gap:40px; flex-wrap:wrap; justify-content:center; padding:40px 20px; width:97%; box-sizing:border-box; }
+.form-container { background:#fff; padding:30px 20px; border-radius:12px; width:500px; box-sizing:border-box; box-shadow:0px 10px 30px rgba(0,0,0,0.2); display:flex; flex-direction:column; align-items:center; }
+.form-container h2 { text-align:center; margin-bottom:20px; color:#333; }
+.form-group { margin-bottom:15px; position:relative; width:100%; }
+.form-group input { width:400px; padding:12px 15px; border:2px solid #ccc; border-radius:8px; outline:none; font-size:14px; transition:0.3s; box-sizing:border-box; }
+.form-group input:focus { border-color:#1e90ff; box-shadow:0px 0px 10px rgba(30,144,255,0.5); }
+.form-group label { position:absolute; top:50%; left:15px; transform:translateY(-50%); color:#777; pointer-events:none; transition:0.3s ease; background:#fff; padding:0 5px; }
+.form-group input:focus + label, .form-group input:not(:placeholder-shown) + label { top:-8px; left:10px; font-size:12px; color:#1e90ff; }
+.btn { width:100%; padding:12px; border:none; border-radius:8px; background:#1e90ff; color:#fff; font-size:16px; font-weight:bold; cursor:pointer; transition:0.3s; }
+.btn:hover { background: linear-gradient(135deg,#6a11cb,#1e90ff); transform:scale(1.05); }
+.character { width:250px; height:250px; }
+@media (max-width:768px) { .container{flex-direction:column; gap:20px;} .character{width:200px;height:200px;} .form-container{width:100%; max-width:400px;} }
+@media (max-width:480px) { .form-container{padding:20px;border-radius:12px;} .btn{font-size:14px; padding:10px;} }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Learnify</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html" onclick="notAllowed(event)">Dashboard</a>
+    <a href="profile.html" onclick="notAllowed(event)">Profile</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" onclick="notAllowed(event)">Contact</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="character" id="person"></div>
+
+  <div class="form-container">
+    <h2>Register</h2>
+    <form id="registerForm">
+      <div class="form-group">
+        <input type="text" id="name" placeholder=" " required>
+        <label for="name">Full Name</label>
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder=" " required>
+        <label for="email">Email</label>
+      </div>
+      <div class="form-group">
+        <input type="phone" id="contact" placeholder=" " required>
+        <label for="contact">Contact No.</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="college" placeholder=" " required>
+        <label for="college">College Name</label>
+      </div>
+      <div class="form-group">
+        <input type="text" id="address" placeholder=" " required>
+        <label for="address">Address</label>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder=" " required>
+        <label for="password">Password</label>
+        <span id="togglePassword" style="position:absolute; right:15px; top:50%; transform:translateY(-50%); cursor:pointer;">👁</span>
+      </div>
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+// Animation
+lottie.loadAnimation({
+  container: document.getElementById('person'),
+  renderer: 'svg',
+  loop: true,
+  autoplay: true,
+  path: "https://assets2.lottiefiles.com/packages/lf20_jcikwtux.json"
+});
+
+// Toggle Password
+document.getElementById("togglePassword").addEventListener("click", function() {
+  const password = document.getElementById("password");
+  password.type = password.type === "password" ? "text" : "password";
+});
+
+// Registration
+document.getElementById("registerForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const contact = document.getElementById("contact").value;
+  const college = document.getElementById("college").value;
+  const address = document.getElementById("address").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  users.push({name,email,password,contact,college,address,avatar:null});
+  localStorage.setItem("users", JSON.stringify(users));
+
+  Swal.fire({
+    icon:'success',
+    title:'Registered Successfully!',
+    confirmButtonColor:'#1e90ff'
+  }).then(()=>window.location.href="login.html");
+});
+
+// Restrict features before login
+function notAllowed(e){
+  e.preventDefault();
+  Swal.fire({
+    icon:'warning',
+    title:'Please register or login first',
+    confirmButtonColor:'#1e90ff'
+  });
+}
+</script>
+
+</body>
+</html>

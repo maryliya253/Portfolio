@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Learnify</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+body { font-family: "Poppins", sans-serif; margin: 0; background: #f9f9f9; }
+header { background: #1e90ff; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+header h1 { margin: 0; }
+header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-weight: 500; cursor:pointer; }
+.contact-container { max-width: 600px; margin: 2rem auto; background: #fff; padding: 2rem; margin-top: 100px; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+h2 { color: #333; text-align: center; }
+form { display: flex; flex-direction: column; }
+input, textarea { margin: 0.5rem 0; padding: 0.8rem; border-radius: 10px; border: 1px solid #ddd; font-size: 1rem; resize: none; }
+button { margin-top: 1rem; padding: 0.8rem 1.5rem; background: #1e90ff; color: #fff; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+button:hover { background: #104e8b; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="navbar-container">
+  <h1 class="logo">Learnify</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
+</div>
+</header>
+
+<div class="contact-container">
+  <h2>Send us a message</h2>
+  <form id="contactForm">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+    <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</div>
+
+<script>
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+// Restrict access if not logged in
+if(!currentUser){
+  Swal.fire({icon:'warning', title:'Please login first', confirmButtonColor:'#1e90ff'})
+  .then(()=>window.location.href='login.html');
+}
+
+// Navbar restriction
+const navLinks = document.querySelectorAll('header nav a');
+navLinks.forEach(link=>{
+  const href = link.getAttribute('href');
+  if(!currentUser && href!=='index.html' && href!=='about.html' && href!=='login.html' && href!=='registrationform.html'){
+    link.addEventListener('click', e=>{
+      e.preventDefault();
+      Swal.fire({icon:'warning', title:'Please login first', confirmButtonColor:'#1e90ff'});
+    });
+  }
+});
+
+// Logout
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('currentUser');
+  Swal.fire({icon:'success', title:'Logged out successfully!', confirmButtonColor:'#1e90ff'})
+  .then(()=>window.location.href='index.html');
+});
+
+// Contact form submission
+document.getElementById("contactForm").addEventListener("submit", function(event){
+  event.preventDefault();
+  const name = this.name.value;
+  Swal.fire({icon:'success', title:`Thank you, ${name}! Your message has been sent.`, confirmButtonColor:'#1e90ff'});
+  this.reset();
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard - Learnify</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+body { font-family: "Poppins", sans-serif; margin: 0; background: #f9f9f9; }
+header { background: #1e90ff; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+header h1 { margin: 0; }
+header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-weight: 500; cursor:pointer; }
+h2 { margin: 1.5rem 0; text-align: center; color: #333; }
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+.course-card { background: #fff; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); overflow: hidden; text-align: center; transition: 0.3s; }
+.course-card img { width: 100%; height: 150px; object-fit: cover; }
+.course-card h3 { margin: 1rem 0; }
+.course-card button { margin-bottom: 1rem; padding: 0.6rem 1.2rem; background: #1e90ff; color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+.course-card button:hover { background: #104e8b; }
+.my-courses { max-width: 800px; margin: 2rem auto; padding: 1rem; }
+.my-courses div { background: #f1f1f1; padding: 0.8rem 1rem; margin: 0.5rem 0; border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<header>
+<div class="navbar-container">
+  <h1 class="logo">Learnify</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="profile.html">Profile</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
+</div>
+</header>
+<br><br><br>
+<center><h1>Welcome to Your Dashboard</h1></center>
+<h2>Available Courses</h2>
+
+<div class="course-grid">
+  <div class="course-card">
+    <img src="./templates/cybersecurity.jpg" alt="Cyber Security">
+    <h3>Cyber Security</h3>
+    <button class="view-course-btn" data-title="Cyber Security">View Course</button>
+  </div>
+
+  <div class="course-card">
+    <img src="./templates/programming.jpg" alt="Programming">
+    <h3>Programming</h3>
+    <button class="view-course-btn" data-title="Programming">View Course</button>
+  </div>
+
+  <div class="course-card">
+    <img src="./templates/datascience.jpg" alt="Data Science">
+    <h3>Data Science</h3>
+    <button class="view-course-btn" data-title="Data Science">View Course</button>
+  </div>
+
+  <div class="course-card">
+    <img src="./templates/uiux.jpg" alt="UI/UX Design">
+    <h3>UI/UX Design</h3>
+    <button class="view-course-btn" data-title="UI/UX Design">View Course</button>
+  </div>
+</div>
+
+<div class="my-courses">
+<h2>My Enrolled Courses</h2>
+<div id="myCoursesList"></div>
+</div>
+
+<script>
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+// Redirect if not logged in
+if(!currentUser){
+  Swal.fire({icon:'warning', title:'Please login first', confirmButtonColor:'#1e90ff'})
+  .then(()=>window.location.href='login.html');
+}
+
+// Navbar restriction for logged-out users
+const navLinks = document.querySelectorAll('header nav a');
+navLinks.forEach(link=>{
+  const href = link.getAttribute('href');
+  if(!currentUser && href!=='index.html' && href!=='about.html' && href!=='login.html' && href!=='registrationform.html'){
+    link.addEventListener('click', e=>{
+      e.preventDefault();
+      Swal.fire({icon:'warning', title:'Please login first', confirmButtonColor:'#1e90ff'});
+    });
+  }
+});
+
+// Logout button
+document.getElementById('logoutBtn').addEventListener('click', ()=>{
+  localStorage.removeItem('currentUser');
+  Swal.fire({icon:'success', title:'Logged out successfully!', confirmButtonColor:'#1e90ff'})
+  .then(()=>window.location.href='index.html');
+});
+
+// Course enrollment logic
+const courseButtons = document.querySelectorAll('.view-course-btn');
+let enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [];
+courseButtons.forEach(btn => {
+  const courseTitle = btn.dataset.title;
+  if(enrolledCourses.includes(courseTitle)){
+    btn.textContent = "Already Enrolled";
+    btn.style.background = "#28a745";
+    btn.style.cursor = "default";
+  }
+  btn.addEventListener('click', () => {
+    if(!enrolledCourses.includes(courseTitle)){
+      enrolledCourses.push(courseTitle);
+      localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
+    }
+    window.location.href = `course.html?title=${encodeURIComponent(courseTitle)}`;
+  });
+});
+
+const myCoursesList = document.getElementById("myCoursesList");
+if(enrolledCourses.length===0){
+  myCoursesList.innerHTML = "<p>You have not enrolled in any courses yet.</p>";
+}else{
+  myCoursesList.innerHTML = enrolledCourses.map(c=>`<div>${c}</div>`).join("");
+}
+</script>
+
+</body>
+</html>

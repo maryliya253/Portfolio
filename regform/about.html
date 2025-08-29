@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Learnify</title>
+<link rel="stylesheet" href="./styles.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<style>
+body { font-family: "Poppins", sans-serif; margin: 0; background: #f9f9f9; }
+header { background: #1e90ff; color: #fff; padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+header h1 { margin: 0; }
+header nav a { color: #fff; margin-left: 15px; text-decoration: none; font-weight: 500; cursor:pointer; }
+.content { max-width: 800px; margin: 2rem auto; background: #fff; padding: 2rem; border-radius: 15px; box-shadow: 0 6px 15px rgba(0,0,0,0.1); }
+h2 { color: #333; }
+p { color: #555; line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>Learnify</h1>
+<nav>
+  <a href="index.html">Home</a>
+  <a href="dashboard.html">Dashboard</a>
+  <a href="profile.html">Profile</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="login.html">Logout</a>
+</nav>
+</header>
+
+<div class="content">
+<h2>Our Mission</h2>
+<p>Learnify is an online learning platform designed to help students access quality courses anytime, anywhere. Our mission is to empower learners with practical skills in technology, cybersecurity, programming, and data science.</p>
+
+<h2>Our Team</h2>
+<p>We are a group of passionate educators and developers who aim to bridge the gap between education and real-world skills. Our team continuously works on adding new courses, features, and resources to help students achieve their goals.</p>
+</div>
+
+<script>
+const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+// Navbar restriction for non-logged in users (except index, about, login, registration)
+const navLinks = document.querySelectorAll('header nav a');
+navLinks.forEach(link=>{
+  const href = link.getAttribute('href');
+  if(!currentUser && href!=='index.html' && href!=='about.html' && href!=='registrationform.html' && href!=='login.html'){
+    link.addEventListener('click', e=>{
+      e.preventDefault();
+      Swal.fire({icon:'warning', title:'Please login first', confirmButtonColor:'#1e90ff'});
+    });
+  }
+});
+</script>
+
+</body>
+</html>
